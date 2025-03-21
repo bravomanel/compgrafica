@@ -1,0 +1,8 @@
+anim
+*.o
+*.out
+*.swp
+aula*
+output*.png
+output*.bmp
+bin
