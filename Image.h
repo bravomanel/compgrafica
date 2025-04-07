@@ -116,12 +116,7 @@ class ImageCol : public Image<Color<N>>{
 	void save_frame(int index, std::string base, std::string ext){
 		char filename[50];
 		snprintf(filename, 50, "%s%03d.%s", base.c_str(), index, ext.c_str());
-		if(ext == "bmp")
-			saveBMP(filename);
-		else if(ext == "png")
-			savePNG(filename);
-		else if(ext == "jpg")
-			saveJPG(filename);
+        save(filename);
 	}
 };
 
