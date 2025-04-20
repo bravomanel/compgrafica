@@ -98,9 +98,10 @@ float F(float x, float y){
 
 	
 	- G(x, y, 450, 800, 30) //Pescoco
-		
-	- G(x, y, 450, 990, 73)
-	- G(x, y, 450, 900, 73); //Cabeca
+	 
+		//Cabeca
+	- G(x, y, 450, 990, 73) 
+	- G(x, y, 450, 900, 73); 
 }
 	
 int main(){

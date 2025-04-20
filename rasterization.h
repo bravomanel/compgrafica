@@ -117,8 +117,8 @@ inline std::vector<Pixel> bresenham(Pixel p0, Pixel p1){
 
 template<class Tri>
 std::vector<Pixel> rasterizeTriangle(const Tri& P){
-	return simple_rasterize_triangle(P);
-	//return scanline(P);
+   //return simple_rasterize_triangle(P);
+   return scanline(P);
 }
 
 template<class Tri>
@@ -142,14 +142,51 @@ std::vector<Pixel> simple_rasterize_triangle(const Tri& P){
 }
 
 
-inline float intersection(vec2 P1, vec2 P2, int y){
-    return 0; // TAREFA - AULA 06
+float interception(vec2 A, vec2 B, int ys ){
+
+	float x = ( ( (B[0]-A[0]) * (ys-A[1]) )/(B[1]-A[1]) ) + A[0]; 
+	if((ys==B[1]) && (ys==A[1])){ //
+		return A[0];
+
+	}else if((B[1] > ys && A[1] > ys) || (B[1] < ys && A[1] < ys)){ 
+		return NAN;
+	
+	}else{
+		return x;
+	}
+	
 }
 
+
+/*  TAREFA - AULA 6  */
 template<class Tri>
 std::vector<Pixel> scanline(const Tri& P){
-	/* TAREFA - AULA 06*/
+	//recebendo os pontos 
+	vec2 A = P[0];
+	vec2 B = P[1];
+	vec2 C = P[2];
+
+		
+	int ymin =  ceil(std::min({A[1], B[1], C[1]}));//recebe o menor valo de y e arredonda para maior para estar dentro 
+	int ymax = floor(std::max({A[1], B[1], C[1]}));//recebe o valor maior de y e arredonda pra menor para ficar dentro
+
 	std::vector<Pixel> out;
+	Pixel p;
+	for(p.y = ymin; p.y <= ymax; p.y++){
+		float ABx = interception(A,B,p.y);
+		float BCx = interception(B,C,p.y);// preencher os seguimentos de de retas das linhas horizontais 
+		float CAx = interception(C,A,p.y);
+
+		// Linhas horizontais
+		int xmin =  ceil(fmin(ABx, fmin(BCx, CAx)));
+		int xmax = floor(fmax(ABx, fmax(BCx, CAx)));
+
+		for(p.x = xmin; p.x <= xmax; p.x++){
+			out.push_back(p);// monta o vetor com as coordenadas da figura
+		}
+	
+	}	
+				
 	return out;
 }
 
