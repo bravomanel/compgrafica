@@ -45,7 +45,7 @@ int main()
 
 	ImageRGBA bush{"DeadBush.png"};
 	composeImage(imagem, bush, 115, 128);
-	
+
 	ImageRGBA tile1{"Tile1.png"};
 	composeImage(imagem, tile1, 110, 420);
 
