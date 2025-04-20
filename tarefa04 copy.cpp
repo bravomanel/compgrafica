@@ -43,20 +43,5 @@ int main()
 	ImageRGBA johnny{"johnny-bravo.png"};
 	composeImage(imagem, johnny, 70, 84);
 
-	ImageRGBA bush{"DeadBush.png"};
-	composeImage(imagem, bush, 115, 128);
-	
-	ImageRGBA tile1{"Tile1.png"};
-	composeImage(imagem, tile1, 110, 420);
-
-	ImageRGBA tile2{"Tile2.png"};
-	composeImage(imagem, tile2, 238, 420);
-
-	ImageRGBA tile3{"Tile3.png"};
-	composeImage(imagem, tile3, 366, 420);
-
-	ImageRGBA zombie{"Zombie.png"};
-	composeImage(imagem, zombie, 280, 540);
-
 	imagem.save("out.png");
 }
