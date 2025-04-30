@@ -4,7 +4,7 @@
 #include "transforms2d.h"
 
 int main(){
-    std::vector<vec2> CP = loadCurve("tarefa07escudo.txt");
+    std::vector<vec2> CP = loadCurve("tarefa07escudocentralizado.txt");
     std::vector<vec2> P = sample_bezier_spline<3>(CP, 50);
 
     ImageRGB I(1200, 900);
