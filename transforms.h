@@ -67,13 +67,40 @@ inline mat4 rotate_z(float angle){
 }
 
 inline mat4 rotate(vec3 n, float theta){
-	/* TAREFA - AULA 10 */
-	return {
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1
-	};
+    // Normaliza o vetor do eixo de rota  o
+    n = normalize(n);
+
+    // Calcula os componentes trigonom tricos
+    float cosTheta = cos(theta);
+    float sinTheta = sin(theta);
+    float oneMinusCos = 1.0f - cosTheta;
+
+    float nx = n[0], ny = n[1], nz = n[2];
+
+    // Cria  o manual da matriz de rota  o
+    mat4 rotationMatrix;
+    rotationMatrix(0, 0) = cosTheta + nx * nx * oneMinusCos;
+    rotationMatrix(0, 1) = nx * ny * oneMinusCos - nz * sinTheta;
+    rotationMatrix(0, 2) = nx * nz * oneMinusCos + ny * sinTheta;
+    rotationMatrix(0, 3) = 0.0f;
+
+    rotationMatrix(1, 0) = ny * nx * oneMinusCos + nz * sinTheta;
+    rotationMatrix(1, 1) = cosTheta + ny * ny * oneMinusCos;
+    rotationMatrix(1, 2) = ny * nz * oneMinusCos - nx * sinTheta;
+    rotationMatrix(1, 3) = 0.0f;
+
+    rotationMatrix(2, 0) = nz * nx * oneMinusCos - ny * sinTheta;
+    rotationMatrix(2, 1) = nz * ny * oneMinusCos + nx * sinTheta;
+    rotationMatrix(2, 2) = cosTheta + nz * nz * oneMinusCos;
+    rotationMatrix(2, 3) = 0.0f;
+
+    rotationMatrix(3, 0) = 0.0f;
+    rotationMatrix(3, 1) = 0.0f;
+    rotationMatrix(3, 2) = 0.0f;
+    rotationMatrix(3, 3) = 1.0f;
+
+    return rotationMatrix;
+
 }
 
 inline mat4 lookAt(vec3 eye, vec3 center, vec3 up){

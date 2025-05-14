@@ -25,7 +25,32 @@ static std::vector<Semiplane> clip_polygon = {
 
 template<class Vertex>
 bool line_clip(Line<Vertex>& line){
-	/**************** TAREFA - AULA 09 **************/
+	float maxIn = 0;
+	float minOut = 1;
+	vec2 A = get2DPosition(line[0]);
+	vec2 B = get2DPosition(line[1]);
+	for(int i = 0; i < clip_polygon.size(); i++){
+		if(!clip_polygon[i].has(A) && !clip_polygon[i].has(B)){
+			return false;
+		}
+		else if(clip_polygon[i].has(A) && clip_polygon[i].has(B)){
+			continue;
+		}
+		float t = clip_polygon[i].intersect(A, B);
+		if(clip_polygon[i].has(A) && !clip_polygon[i].has(B)){
+			minOut = std::min(minOut, t);
+		}
+		if(!clip_polygon[i].has(A) && clip_polygon[i].has(B)){
+			maxIn = std::max(maxIn, t);
+		}
+		if(maxIn>minOut){
+			return false;
+		}
+	}
+	Line<Vertex> line_aux;
+	line_aux[0] = mix_line(maxIn, line);
+	line_aux[1] = mix_line(minOut, line);
+	line = line_aux;
 	return true;
 }
 
