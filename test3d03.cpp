@@ -1,6 +1,10 @@
 #include "Render2D.h"
 #include "matrix.h"
 #include "transforms.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
+
+
 
 int main(){
 	// Coordenadas do modelo
@@ -16,9 +20,9 @@ int main(){
 	};
 
 	int w = 600, h = 600;
-	mat4 Projection = orthogonal(-2, 2, -2, 2, 4, 10);
+	// mat4 Projection = orthogonal(-2, 2, -2, 2, 4, 10);
 	//mat4 Projection = frustum(-2, 2, -2, 2, 4, 10);
-	//mat4 Projection = perspective(60, w/(float)h, 4, 10);
+	mat4 Projection = perspective(60, w/(float)h, 4, 10);
 	mat4 View = lookAt({3, 2, 4}, {0, 0, 0}, {0, 1, 0});
 	mat4 Model = loadIdentity();
 
