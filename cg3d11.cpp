@@ -4,6 +4,8 @@
 #include "MixColorShader.h"
 #include "VertexUtils.h"
 #include "transforms.h"
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image_write.h"
 
 struct Metaball{
 	float a;
@@ -39,12 +41,43 @@ int main(){
 	MetaballFigure figure;
 	figure.T = 0.5;
     figure.metaballs = {
-		{1, 1.5, { 0, 0, 0}},
-		{1, 0.7, { 0, 0.1, 1}},
-		{1, 0.5, { 1, 0, 0}},
-		{1, 0.5, {-1, 0, 0}},
-		{1, 0.5, {0.4, 0,-0.9}},
-		{1, 0.5, {-0.4, 0,-0.9}},
+		// {1, 1.5, { 0, 0, 0}},
+		// {1, 0.7, { 0, 0.1, 1}},
+		// {1, 0.5, { 1, 0, 0}},
+		// {1, 0.5, {-1, 0, 0}},
+		// {1, 0.5, {0.4, 0,-0.9}},
+		// {1, 0.5, {-0.4, 0,-0.9}},
+
+		// Cabeça
+		{1, 1.8, { 0, 0, 0}},
+		
+		// Olhos
+		{1, 0.3, {0.4, 0.75, 0.3}},
+		{1, 0.3, {-0.4, 0.75, 0.3}},
+
+		// Nariz
+		{1, 0.3, {0, 0.8, 0}},
+		{1, 0.1, {-0.1, 0.8, 0}},
+		{1, 0.1, {0.1, 0.8, 0}},
+
+
+		// Boca
+		{1, 0.1, {-0.4, 0.75, -0.3}},
+		{1, 0.1, {-0.3, 0.75, -0.3}},
+		{1, 0.1, {-0.2, 0.75, -0.3}},
+		{1, 0.1, {-0.1, 0.75, -0.3}},
+		{1, 0.1, {0, 0.75, -0.3}},
+		{1, 0.1, {0.1, 0.75, -0.3}},
+		{1, 0.1, {0.2, 0.75, -0.3}},
+		{1, 0.1, {0.3, 0.75, -0.3}},
+		{1, 0.1, {0.4, 0.75, -0.3}},
+
+		// Orelhas
+		{1, 0.2, { 0.8, -0.1, 0}},
+		{1, 0.2, { 0.8, 0.1, 0}},
+		{1, 0.2, {-0.8, -0.1, 0}},
+		{1, 0.2, {-0.8, 0.1, 0}},
+
     };
 
 	vec3 pmin = {-2, -2, -2}; 
@@ -55,9 +88,14 @@ int main(){
 	MixColorShader shader;
 	shader.pmin = pmin;
 	shader.pmax = pmax;
+	// shader.C = {
+	// 	red, blue, green, yellow, 
+	// 	orange, magenta, cyan, purple
+	// };
 	shader.C = {
-		red, blue, green, yellow, 
-		orange, magenta, cyan, purple
+		green, purple, yellow, red,
+		orange, red, orange, magenta
+
 	};
 
 	Triangles T{P.size()};
