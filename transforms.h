@@ -106,16 +106,6 @@ inline mat4 rotate(vec3 n, float theta){
 
 inline mat4 lookAt(vec3 eye, vec3 center, vec3 up)
 {
-	// vec3 f = normalize(center - eye);
-	// vec3 s = normalize(cross(f, normalize(up)));
-	// vec3 u = cross(s, f);
-
-	// Mat Vt = transpose(toMat(s, u, -f));
-
-	// Mat view = toMat4(Vt) * translate(-eye);
-
-	// return view;
-
 	up=normalize(up);
 	vec3 f=normalize(center-eye);
 	vec3 s=normalize(cross(f,up));
@@ -155,7 +145,7 @@ inline mat4 frustum(float l, float r, float b, float t, float n, float f){
 }
 
 inline mat4 perspective(float fovy, float aspect, float Near, float Far){
-	float fovyRad = fovy * 3.1415 / 180;
+	float fovyRad = fovy * 3.141592653 / 180;
 	float t = Near * tan(fovyRad / 2);
 	float b = -t;
 	float r = t * aspect;
