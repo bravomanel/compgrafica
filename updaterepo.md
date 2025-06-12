@@ -57,3 +57,11 @@ git rebase upstream/main
 ---
 
 Se quiser automatizar a sincronização, posso te ajudar a criar um script também. Quer?
+
+
+
+# Para adicionar a um repositório já existente
+
+1. git remote add upstream https://gitlab.com/leonardooc/cg2025.1.git
+2. git fetch upstream
+3. git merge upstream/master --allow-unrelated-histories
