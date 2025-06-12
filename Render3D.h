@@ -40,15 +40,17 @@ struct Render3D{
 		}
 	}
 	
-	void draw(Triangle<Varying> tri){
-		vec4 P[] = { tri[0].position, tri[1].position, tri[2].position };
-		vec2 T[] = { toScreen(P[0]), toScreen(P[1]), toScreen(P[2]) };
+    void draw(Triangle<Varying> tri){
+        vec4 P[] = { tri[0].position, tri[1].position, tri[2].position };
+        vec2 T[] = { toScreen(P[0]), toScreen(P[1]), toScreen(P[2]) };
+        vec3 iw = { 1/P[0][3], 1/P[1][3], 1/P[2][3] };
 
-		for(Pixel p: rasterizeTriangle(T)){
-			vec3 t = barycentric_coords(toVec2(p), T);
-
-			Varying vi = mix_triangle(t, tri);
-			paint(p, vi);
+        for(Pixel p: rasterizeTriangle(T)){
+            vec3 t = barycentric_coords(toVec2(p), T);
+            t = t*iw;
+            t = 1.0/(t[0]+t[1]+t[2])*t;
+            Varying vi = mix_triangle(t, tri);
+            paint(p, vi);
 		}
 	}
 
