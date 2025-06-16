@@ -33,7 +33,7 @@ git remote add origin https://github.com/seu-usuario/seu-repo.git
 git push -u origin main
 ```
 > Se o branch principal tiver outro nome (tipo `master`), substitua `main` por ele.
-
+****
 ---
 
 ### ✅ **5. Para manter atualizado com o GitLab**
