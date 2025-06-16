@@ -93,8 +93,8 @@ int main(){
         glUseProgram(shaderProgram);
         mat4 Model = rotate_y(0.2)*rotate_x(0.1)*translate(-0.5, -0.5, -0.5);
         mat4 View = lookAt({0, 1, 2}, {0, 0, 0}, {0, 1, 0});
-    	mat4 Projection = perspective(60, 1, 0.01, 100.0);
-        //mat4 Projection = orthogonal(-2, 2, -2, 2, -4, 4);
+    	// mat4 Projection = perspective(60, 1, 0.01, 100.0);
+        mat4 Projection = orthogonal(-2, 2, -2, 2, -4, 4);
 
         mat4 M = Projection*View*Model;
         int loc = glGetUniformLocation(shaderProgram, "M");

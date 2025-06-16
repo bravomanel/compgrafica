@@ -136,26 +136,29 @@ int main(){
 	
     std::vector<GLMesh> meshes;
 
-	meshes.emplace_back("modelos/floor.obj", 
-		scale(35, 35, 35), "../brickwall.jpg");
-	
-	meshes.emplace_back("modelos/box.obj", 
-		translate(1, 1, -6)*rotate_y(-0.4), "../bob.jpg");
+	meshes.emplace_back(
+		"modelos/Retroville Street/bg_jimmy_06_hi.obj",
+		translate(0, 1, -5)*rotate_y(0.4)*scale(1,1,1));
 
-	meshes.emplace_back("modelos/metroid/DolBarriersuit.obj", 
-		translate(-1, 0, -1)*rotate_y(0.2)*scale(.1, .1, .1));
+	meshes.emplace_back(
+		"modelos/Luigi/luigi.obj",
+		translate(-3.5, 1, 2.5)*rotate_y(1.4)*scale(0.01, 0.01, 0.01));
 
-	meshes.emplace_back("modelos/pose/pose.obj", 
-		translate(1, 0, 0)*scale(0.009, 0.009, 0.009));
-	
-	meshes.emplace_back("modelos/cat/Cat.obj", 
-		translate(0, 0, 1)*scale(0.02, 0.02, 0.02)*rotate_x(-0.5*M_PI));
+	meshes.emplace_back(
+		"modelos/Mario/mario.obj",
+		translate(-2, 1, 1)*rotate_y(0.7)*scale(0.01, 0.01, 0.01));
 
-	meshes.emplace_back("modelos/House Complex/House Complex.obj", 
-		translate(4, 0, 0)*rotate_y(0.5*M_PI)*scale(.15, .15, .15));
+	meshes.emplace_back(
+		"modelos/Arm Cannon/Light Beam.obj", 
+		translate(0.4, 2.65, 1.15)*rotate_y(0.2)*scale(1,1,1));
 
-	meshes.emplace_back("modelos/pony-cartoon/Pony_cartoon.obj", 
-		translate(-2, -0.0001, -3)*scale(0.005, 0.005, 0.005), "brickwall.jpg" );
+	meshes.emplace_back(
+		"modelos/Samus (PED Suit)/Samus (PED Suit + Hazard Shield, 75% Corruption).obj", 
+		translate(1, 1, 1)*rotate_y(0.2)*scale(0.6,0.6,0.6));
+
+	meshes.emplace_back(
+		"modelos/Kawasaki_Ki-61/14082_WWII_Plane_Japan_Kawasaki_Ki-61_v1_L2.obj", 
+		translate(0, 2, -4)*rotate_x(-1.76)*rotate_z(-1.57)*scale(5, 5, 5));
 
     float vangle = 0;
     mat4 BaseView = lookAt({0, 1.6, 5}, {0, 1.6, 0}, {0, 1, 0});

@@ -27,7 +27,7 @@ int main(){
 	std::cout << "GL Version: " << glGetString(GL_VERSION) << '\n';
 	std::cout << "GLSL Version: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << '\n';
 
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
 	ShaderProgram shaderProgram{
 		Shader{"ColorShader.vert", GL_VERTEX_SHADER},
