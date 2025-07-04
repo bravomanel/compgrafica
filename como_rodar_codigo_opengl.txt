@@ -1,0 +1,1 @@
+g++ -O3 gl07.cpp utilsGL.cpp Image.cpp -lGLEW -lGL -lglfw
