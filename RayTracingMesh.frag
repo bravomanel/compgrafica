@@ -24,9 +24,10 @@ layout (binding = 0) buffer TrianglesBuffer{
 /////////////////////////////////////////////////////
 
 struct Range{
-	uint first;
-	uint count;
+	uint begin;
+	uint end;
 	uint mapKd_index;
+	int children[8];
 };
 
 layout (binding = 1) buffer RangesBuffer{
@@ -42,6 +43,8 @@ struct BoundingBox{
 layout (binding = 2) buffer BBsBuffer{
 	BoundingBox bbs[];
 };
+
+uniform int root_index;
 
 /////////////////////////////////////////////////////
 
@@ -156,37 +159,52 @@ bool intersect(Ray ray, BoundingBox BB){
     return tmin <= tmax;
 }
 
+#define STACK_MAX_SIZE 50
+
 // Calcula a interseção entre um raio e a superfície
 Intersection intersection(Ray ray){	
 	Intersection I;
 	I.exists = false;
 
-	for(int k = 0; k < ranges.length(); k++){
-		// Testa interseção com a caixa envolvente.
-		if(!intersect(ray, bbs[k]))
+	int stack[STACK_MAX_SIZE];
+    int stack_size = 0;
+    stack[stack_size++] = root_index;
+
+    while(stack_size > 0 && stack_size <= STACK_MAX_SIZE){
+        int top = stack[--stack_size];
+        if(!intersect(ray, bbs[top]))
 			continue;
 
-		Range R = ranges[k];
-		for(uint i = R.first; i < R.first+R.count; i += 3){
-			Vertex Tri[3] = {tris[i], tris[i+1], tris[i+2]};
-			vec3 T[3] = {Tri[0].position, Tri[1].position, Tri[2].position};
-			float t, u, v;
-			if(intersect(ray, T, t, u, v)){
-				if(!I.exists || t < I.t){
-					float w = 1 - u - v;
-					vec3 N[3] = { Tri[0].normal,    Tri[1].normal,    Tri[2].normal    };
-					vec2 C[3] = { Tri[0].texCoords, Tri[1].texCoords, Tri[2].texCoords };
+		//I.exists = true;
+		//return I;
 
-					I.exists           = true;
-					I.vertex.position  = w*T[0] + u*T[1] + v*T[2];
-					I.vertex.normal    = w*N[0] + u*N[1] + v*N[2];
-					I.vertex.texCoords = w*C[0] + u*C[1] + v*C[2];
-					I.mapKd_index      = R.mapKd_index;
-					I.t                = t;
+        Range R = ranges[top];
+		if(R.children[0] == -1){
+			for(uint i = R.begin; i != R.end; i += 3){
+				Vertex Tri[3] = {tris[i], tris[i+1], tris[i+2]};
+				vec3 T[3] = {Tri[0].position, Tri[1].position, Tri[2].position};
+				float t, u, v;
+				if(intersect(ray, T, t, u, v)){
+					if(!I.exists || t < I.t){
+						float w = 1 - u - v;
+						vec3 N[3] = { Tri[0].normal,    Tri[1].normal,    Tri[2].normal    };
+						vec2 C[3] = { Tri[0].texCoords, Tri[1].texCoords, Tri[2].texCoords };
+
+						I.exists           = true;
+						I.vertex.position  = w*T[0] + u*T[1] + v*T[2];
+						I.vertex.normal    = w*N[0] + u*N[1] + v*N[2];
+						I.vertex.texCoords = w*C[0] + u*C[1] + v*C[2];
+						I.mapKd_index      = R.mapKd_index;
+						I.t                = t;
+					}
 				}
 			}
 		}
-	}
+
+		for(int k = 0; k < 8 && R.children[k] != -1; k++)
+			stack[stack_size++] = R.children[k];
+    }
+
 	return I;
 }
 
