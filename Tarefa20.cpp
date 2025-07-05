@@ -173,8 +173,8 @@ int main(){
         float a = screen_width/(float)screen_height;
         Uniform{"Projection"} = perspective(50, a, 0.1, 50);
 
-        Uniform{"Ka"}  = vec3{1, 0, 0};
-        Uniform{"Kd"}  = vec3{1, 0, 0};
+        Uniform{"Ka"}  = vec3{1.0, 0.0, 0.0};
+        Uniform{"Kd"}  = vec3{1.0, 0.0, 0.0};
         Uniform{"Ks"}  = vec3{ 1.0, 1.0, 1.0};
         Uniform{"shininess"} = 20.0f;
 

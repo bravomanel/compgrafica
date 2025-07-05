@@ -10,7 +10,7 @@ newmtl 14082_WWII_Plane_Japan_Kawasaki_Ki_61_body_01
 	illum 2
 	Ka 1.0000 1.0000 1.0000
 	Kd 1.0000 1.0000 1.0000
-	Ks 0.0000 0.0000 0.0000
+	Ks 0.5000 0.5000 0.5000
 	Ke 0.0000 0.0000 0.0000
 	map_Ka 14082_WWII_Plane_Japan_Kawasaki_Ki-61_diffuse_v1.jpg
 	map_Kd 14082_WWII_Plane_Japan_Kawasaki_Ki-61_diffuse_v1.jpg

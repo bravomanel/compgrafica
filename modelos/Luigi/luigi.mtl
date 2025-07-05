@@ -1,34 +1,41 @@
 newmtl m5
 Kd 0.800000 0.800000 0.800000
+Ka 0.800000 0.800000 0.800000
 illum 1
 map_Kd LuigiHair.png
 
 newmtl m1
 Kd 0.800000 0.800000 0.800000
+Ka 0.800000 0.800000 0.800000
 illum 1
 map_Kd LuigiCap.0.png
 
 newmtl m3
+Ka 0.800000 0.800000 0.800000
 Kd 0.800000 0.800000 0.800000
 illum 1
 map_Kd LuigiEyeBall.png
 
 newmtl m2
+Ka 0.800000 0.800000 0.800000
 Kd 0.800000 0.800000 0.800000
 illum 1
 map_Kd Luigi_eyeLid.0.png
 
 newmtl m4
+Ka 0.800000 0.800000 0.800000
 Kd 0.800000 0.800000 0.800000
 illum 1
 map_Kd LuigiFace.png
 
 newmtl m6
+Ka 0.800000 0.800000 0.800000
 Kd 0.800000 0.800000 0.800000
 illum 1
 map_Kd LuigiHand.png
 
 newmtl m0
+Ka 0.800000 0.800000 0.800000
 Kd 0.800000 0.800000 0.800000
 illum 1
 map_Kd LuigiBody.0.png
